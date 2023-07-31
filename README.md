@@ -49,10 +49,10 @@ WHERE `length` > (SELECT AVG(`length`) FROM film f2)
 
 **Решение**:
 ```
-SELECT month(p.payment_date) AS 'Highest Amount of Payments Received Month', count(r.rental_id) 'Number of Rentals'
+SELECT DATE_FORMAT(p.payment_date, '%Y.%m') AS 'Highest Amount of Payments Received Month', count(r.rental_id) 'Number of Rentals'  
 FROM payment p INNER JOIN 
      rental r ON p.rental_id = r.rental_id 
-GROUP BY  month(payment_date)
+GROUP BY DATE_FORMAT(p.payment_date, '%Y.%m') 
 ORDER BY  sum(p.amount) DESC
 LIMIT 1
 ```
